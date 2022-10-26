@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User description</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Address</th>
+      <th>Description</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+          <td><%= article.first_name %></td>
+          <td><%= article.last_name %></td>
+          <td><%= article.address %></td>
+          <td><%= article.description %></td>
+          <td><%= image_tag article.header_image.variant(resize_to_limit: [80, nil]) %></td>
+        
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'Home', root_path %>

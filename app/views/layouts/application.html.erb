@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <% if current_user %>
+      Login as: <%= current_user.email %>
+    <% end %>
+    <%= render 'layouts/messages' %>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,33 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.first_name %>
+</p>
+<p>
+  <strong>Title:</strong>
+  <%= @article.last_name %>
+</p>
+<p >
+  <%= image_tag @article.header_image.variant(resize_to_limit: [150, nil]) %>
+</p>
+
+<% if @article.uploads.any? %>
+   <h3>Download CVs from <%= @article.first_name %></h3>
+   <% @article.uploads.each do |file| %>
+     <% if file.variable? %>
+       <%= image_tag file.variant(resize: "400x400") %>
+     <% elsif file.previewable? %>
+       <%= image_tag file.preview(resize: "400x400"), rails_blob_path(file, disposition: :attachment) %>
+     <% else %>
+       <%= link_to file.filename, rails_blob_path(file, disposition: :attachment) %>
+     <% end %>
+     <%= link_to 'Remove attachment', delete_file_article_url(file.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+   <% end %>
+<% end %>
+<p>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %> |
+</p>
+
